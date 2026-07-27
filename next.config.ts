@@ -1,7 +1,13 @@
 import type { NextConfig } from "next";
 
+const isGithubPages = process.env.GITHUB_ACTIONS || process.env.NODE_ENV === "production";
+
 const nextConfig: NextConfig = {
+  output: "export",
+  trailingSlash: true,
+
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -9,6 +15,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
+  basePath: isGithubPages ? "/Protiti-Technical-Training-Academy-PTTA-" : "",
+  assetPrefix: isGithubPages ? "/Protiti-Technical-Training-Academy-PTTA-/" : "",
 };
 
 export default nextConfig;
